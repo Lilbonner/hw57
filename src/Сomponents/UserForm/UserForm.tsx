@@ -6,16 +6,16 @@ interface Props {
 }
 
 const UserForm: React.FC<Props> = ({onSubmit}) => {
-  const [dish, setDish] = useState({
+  const [user, setUser] = useState({
     name: '',
     email: '',
     isActive: '',
     role: 'User',
   });
 
-  const changeDish = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const changeUser = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 
-    setDish(prev => ({
+    setUser(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
@@ -25,15 +25,14 @@ const UserForm: React.FC<Props> = ({onSubmit}) => {
     e.preventDefault();
     onSubmit({
       id: Math.random().toString(),
-      ...dish,
-      isActive: dish.isActive.toString(),
+      ...user,
+      isActive: user.isActive.toString(),
     });
   };
 
 
   return (
     <form onSubmit={onFormSubmit}>
-      <h4>Add new dish</h4>
       <div className="form-group">
         <label htmlFor="name">Name</label>
         <input
@@ -41,8 +40,8 @@ const UserForm: React.FC<Props> = ({onSubmit}) => {
           name="name"
           id="name"
           className="form-control"
-          value={dish.name}
-          onChange={changeDish}
+          value={user.name}
+          onChange={changeUser}
         />
       </div>
       <div className="form-group">
@@ -52,8 +51,8 @@ const UserForm: React.FC<Props> = ({onSubmit}) => {
           name="email"
           id="email"
           className="form-control"
-          value={dish.email}
-          onChange={changeDish}
+          value={user.email}
+          onChange={changeUser}
           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
           required
         />
@@ -64,11 +63,11 @@ const UserForm: React.FC<Props> = ({onSubmit}) => {
         <select
           name="isActive"
           className="form-control"
-          value={dish.isActive}
-          onChange={changeDish}
+          value={user.isActive}
+          onChange={changeUser}
         >
-          <option value="true">True</option>
-          <option value="false">False</option>
+          <option value="true">True (online)</option>
+          <option value="false">False (offline)</option>
         </select>
       </div>
 
@@ -78,8 +77,8 @@ const UserForm: React.FC<Props> = ({onSubmit}) => {
           name="role"
           className="form-control"
           placeholder="select role"
-          value={dish.role}
-          onChange={changeDish}>
+          value={user.role}
+          onChange={changeUser}>
           <option value="user">User</option>
           <option value="editor">Editor</option>
           <option value="admin">Administrator</option>
